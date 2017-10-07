@@ -51,6 +51,7 @@ const setParameters = (params) => {
     successIconParts[i].style.background = params.background
   }
 
+  const container = dom.getContainer()
   const title = dom.getTitle()
   const content = dom.getContent()
   const buttonsWrapper = dom.getButtonsWrapper()
@@ -250,9 +251,8 @@ const setParameters = (params) => {
   }
 
   // CSS animation
-  if (params.animation === true) {
-    dom.removeClass(modal, swalClasses.noanimation)
-  } else {
+  if (!params.animation) {
+    dom.addClass(container, swalClasses.noanimation)
     dom.addClass(modal, swalClasses.noanimation)
   }
 
@@ -275,10 +275,7 @@ const openModal = (animation, onComplete) => {
 
   if (animation) {
     dom.addClass(modal, swalClasses.show)
-    dom.addClass(container, swalClasses.fade)
     dom.removeClass(modal, swalClasses.hide)
-  } else {
-    dom.removeClass(modal, swalClasses.fade)
   }
   dom.show(modal)
 
@@ -295,7 +292,9 @@ const openModal = (animation, onComplete) => {
 
   dom.addClass(document.documentElement, swalClasses.shown)
   dom.addClass(document.body, swalClasses.shown)
-  dom.addClass(container, swalClasses.shown)
+  setTimeout(() => { // sweetalert2/issues/653
+    dom.addClass(container, swalClasses.shown)
+  })
   fixScrollbar()
   iOSfix()
   dom.states.previousActiveElement = document.activeElement
@@ -1100,6 +1099,7 @@ sweetAlert.close = sweetAlert.closeModal = (onComplete) => {
   if (!modal) {
     return
   }
+  dom.removeClass(container, swalClasses.shown)
   dom.removeClass(modal, swalClasses.show)
   dom.addClass(modal, swalClasses.hide)
   clearTimeout(modal.timeout)

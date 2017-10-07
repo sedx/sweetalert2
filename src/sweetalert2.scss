@@ -25,18 +25,18 @@ body {
   bottom: 0;
   right: 0;
   padding: 10px;
-
-  // backdrop
-  background-color: transparent;
-
   z-index: 1060;
 
-  &.swal2-fade {
-    transition: background-color .1s;
-  }
+  // backdrop
+  background-color: $swal2-transparent;
+  transition: background-color .3s;
 
   &.swal2-shown {
     background-color: $swal2-overlay;
+  }
+
+  &.swal2-noanimation {
+    transition: none;
   }
 }
 
@@ -612,7 +612,7 @@ body {
 }
 
 .swal2-hide {
-  animation: hideSweetAlert .15s forwards;
+  animation: hideSweetAlert .3s forwards;
 
   &.swal2-noanimation {
     animation: none;

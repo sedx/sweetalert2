@@ -14,7 +14,6 @@ export const swalClasses = prefix([
   'iosfix',
   'modal',
   'overlay',
-  'fade',
   'show',
   'hide',
   'noanimation',
