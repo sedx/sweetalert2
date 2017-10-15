@@ -1,6 +1,6 @@
 import { default as sweetAlert } from '../sweetalert2.js'
 import { swalClasses, iconTypes } from './classes.js'
-import { uniqueArray, error } from './utils.js'
+import { uniqueArray } from './utils.js'
 
 // Remember state in cases where opening and handling a modal will fiddle with it.
 export const states = {
@@ -17,11 +17,6 @@ export const init = (params) => {
   const c = getContainer()
   if (c) {
     c.parentNode.removeChild(c)
-  }
-
-  if (typeof document === 'undefined') {
-    error('SweetAlert2 requires document to initialize')
-    return
   }
 
   const container = document.createElement('div')
@@ -124,6 +119,8 @@ const sweetHTML = `
    <button type="button" class="${swalClasses.close}">×</button>
  </div>
 `.replace(/(^|\n)\s*/g, '')
+
+export const getBackdrop = () => document.body.querySelector('.' + swalClasses.backdrop)
 
 export const getContainer = () => document.body.querySelector('.' + swalClasses.container)
 

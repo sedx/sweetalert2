@@ -6,12 +6,32 @@
 body {
   &.swal2-shown {
     overflow-y: hidden;
+
+    & > .swal2-backdrop {
+      z-index: 1059;
+      background-color: $swal2-overlay;
+    }
   }
 
   &.swal2-iosfix {
     position: fixed;
     left: 0;
     right: 0;
+  }
+}
+
+.swal2-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: $swal2-transparent;
+  transition: background-color 0.3s;
+  z-index: -1;
+
+  &.swal2-noanimation {
+    transition: none;
   }
 }
 
@@ -26,14 +46,6 @@ body {
   right: 0;
   padding: 10px;
   z-index: 1060;
-
-  // backdrop
-  background-color: $swal2-transparent;
-  transition: background-color .3s;
-
-  &.swal2-shown {
-    background-color: $swal2-overlay;
-  }
 
   &.swal2-noanimation {
     transition: none;
