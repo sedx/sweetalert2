@@ -72,6 +72,7 @@ var defaultParams = {
   progressSteps: [],
   currentProgressStep: null,
   progressStepsDistance: '40px',
+  onBeforeOpen: null,
   onOpen: null,
   onClose: null,
   useRejections: true
@@ -839,9 +840,13 @@ var setParameters = function setParameters(params) {
 /*
  * Animations
  */
-var openModal = function openModal(animation, onComplete) {
+var openModal = function openModal(animation, onComplete, onBeforeOpen) {
   var container = getContainer();
   var modal = getModal();
+
+  if (onBeforeOpen !== null && typeof onBeforeOpen === 'function') {
+    onBeforeOpen(modal);
+  }
 
   if (animation) {
     addClass(modal, swalClasses.show);
@@ -1586,7 +1591,7 @@ var sweetAlert = function sweetAlert() {
       }
     }
 
-    openModal(params.animation, params.onOpen);
+    openModal(params.animation, params.onOpen, params.onBeforeOpen);
 
     if (!params.allowEnterKey) {
       if (document.activeElement) {
